@@ -28,7 +28,6 @@ namespace kinectTestWPF1
         public MainWindow()
         {
             InitializeComponent();
-
             
          try {
                 if ( KinectSensor.KinectSensors.Count == 0 ) {
@@ -59,7 +58,7 @@ namespace kinectTestWPF1
         void kinect_AllFramesReady( object sender, AllFramesReadyEventArgs e )
         {
             imageRgbCamera.Source = e.OpenColorImageFrame().ToBitmapSource();
-            imageDepthCamera.Source = e.OpenDepthImageFrame().ToBitmapSource();
+            //imageDepthCamera.Source = e.OpenDepthImageFrame().ToBitmapSource();
 
             // 骨格位置の表示
             ShowSkeleton( e );
@@ -86,31 +85,11 @@ namespace kinectTestWPF1
                             if (joint.JointType == JointType.HandRight)
                             {
                                 midi1.sendAll(joint.Position.X, joint.Position.Y, joint.Position.Z);
-                                // 骨格の座標をカラー座標に変換する
-                                ColorImagePoint point = kinect.MapSkeletonPointToColor(joint.Position, kinect.ColorStream.Format);
-
-                                // 円を書く
-                                canvas1.Children.Add(new Ellipse()
-                                {
-                                    Margin = new Thickness(point.X, point.Y, 0, 0),
-                                    Fill = new SolidColorBrush(Colors.Red),
-                                    Width = 20,
-                                    Height = 20,
-                                });
+                                drawCircle(joint,Colors.Red);
                             }
                             else
                             {
-                                // 骨格の座標をカラー座標に変換する
-                                ColorImagePoint point = kinect.MapSkeletonPointToColor(joint.Position, kinect.ColorStream.Format);
-
-                                // 円を書く
-                                canvas1.Children.Add(new Ellipse()
-                                {
-                                    Margin = new Thickness(point.X, point.Y, 0, 0),
-                                    Fill = new SolidColorBrush(Colors.Black),
-                                    Width = 20,
-                                    Height = 20,
-                                });
+                                drawCircle(joint, Colors.Blue);
                             }
                         }
                     }
@@ -132,6 +111,34 @@ namespace kinectTestWPF1
         private void button3_Click(object sender, RoutedEventArgs e)
         {
             midi1.sendZ();
+        }
+        private void drawCircle(Joint joint,Color color)
+        {
+            // 骨格の座標をカラー座標に変換する
+            ColorImagePoint point = kinect.MapSkeletonPointToColor(joint.Position, kinect.ColorStream.Format);
+            double[] multiMargin1;
+            multiMargin1 = getMargin();
+            // 円を書く
+            canvas1.Children.Add(new Ellipse()
+            {
+                Margin = new Thickness(multiMargin1[0] * point.X, multiMargin1[0] * point.Y, 0, 0),
+                Fill = new SolidColorBrush(color),
+                Width = 20,
+                Height = 20,
+            });
+        }
+        private double[] getMargin()
+        {
+            double rgbMin = Math.Min(imageRgbCamera.ActualHeight, imageRgbCamera.ActualWidth);
+            double multiWidth = rgbMin / 640;
+            double multiHeight = rgbMin / 480;
+            double[] multiMargin;
+            multiMargin=new double[2];
+            multiMargin[0] = multiWidth;
+            multiMargin[1] = multiHeight;
+            
+            return multiMargin;
+
         }
     }
 }
