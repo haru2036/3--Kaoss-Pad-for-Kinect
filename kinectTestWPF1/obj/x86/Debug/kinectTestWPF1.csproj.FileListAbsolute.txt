@@ -1,0 +1,17 @@
+C:\Users\haruka\Documents\Visual Studio 2010\Projects\kinectTestWPF1\kinectTestWPF1\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\haruka\Documents\Visual Studio 2010\Projects\kinectTestWPF1\kinectTestWPF1\obj\x86\Debug\MainWindow.baml
+C:\Users\haruka\Documents\Visual Studio 2010\Projects\kinectTestWPF1\kinectTestWPF1\obj\x86\Debug\MainWindow.g.cs
+C:\Users\haruka\Documents\Visual Studio 2010\Projects\kinectTestWPF1\kinectTestWPF1\obj\x86\Debug\App.g.cs
+C:\Users\haruka\Documents\Visual Studio 2010\Projects\kinectTestWPF1\kinectTestWPF1\obj\x86\Debug\kinectTestWPF1_MarkupCompile.cache
+C:\Users\haruka\Documents\Visual Studio 2010\Projects\kinectTestWPF1\kinectTestWPF1\obj\x86\Debug\kinectTestWPF1.g.resources
+C:\Users\haruka\Documents\Visual Studio 2010\Projects\kinectTestWPF1\kinectTestWPF1\obj\x86\Debug\kinectTestWPF1.Properties.Resources.resources
+C:\Users\haruka\Documents\Visual Studio 2010\Projects\kinectTestWPF1\kinectTestWPF1\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\Users\haruka\Documents\Visual Studio 2010\Projects\kinectTestWPF1\kinectTestWPF1\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\haruka\Documents\Visual Studio 2010\Projects\kinectTestWPF1\kinectTestWPF1\bin\Debug\kinectTestWPF1.exe
+C:\Users\haruka\Documents\Visual Studio 2010\Projects\kinectTestWPF1\kinectTestWPF1\bin\Debug\kinectTestWPF1.pdb
+C:\Users\haruka\Documents\Visual Studio 2010\Projects\kinectTestWPF1\kinectTestWPF1\bin\Debug\Coding4Fun.Kinect.Wpf.dll
+C:\Users\haruka\Documents\Visual Studio 2010\Projects\kinectTestWPF1\kinectTestWPF1\bin\Debug\Microsoft.Expression.Drawing.dll
+C:\Users\haruka\Documents\Visual Studio 2010\Projects\kinectTestWPF1\kinectTestWPF1\bin\Debug\Midi.dll
+C:\Users\haruka\Documents\Visual Studio 2010\Projects\kinectTestWPF1\kinectTestWPF1\bin\Debug\Midi.xml
+C:\Users\haruka\Documents\Visual Studio 2010\Projects\kinectTestWPF1\kinectTestWPF1\obj\x86\Debug\kinectTestWPF1.exe
+C:\Users\haruka\Documents\Visual Studio 2010\Projects\kinectTestWPF1\kinectTestWPF1\obj\x86\Debug\kinectTestWPF1.pdb
