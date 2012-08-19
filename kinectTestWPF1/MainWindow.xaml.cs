@@ -85,11 +85,15 @@ namespace kinectTestWPF1
                             if (joint.JointType == JointType.HandRight)
                             {
                                 midi1.sendAll(joint.Position.X, joint.Position.Y, joint.Position.Z);
-                                drawCircle(joint,Colors.Red);
+                                drawCircle(joint, Colors.Red, 5);
+                            }
+                            else if (joint.JointType == JointType.Head)
+                            {
+                                drawCircle(joint, Colors.Aqua, 5);
                             }
                             else
                             {
-                                drawCircle(joint, Colors.Blue);
+                                drawCircle(joint, Colors.Blue, 5);
                             }
                         }
                     }
@@ -112,7 +116,9 @@ namespace kinectTestWPF1
         {
             midi1.sendZ();
         }
-        private void drawCircle(Joint joint,Color color)
+
+
+        private void drawCircle(Joint joint, Color color, int cir)
         {
             // 骨格の座標をカラー座標に変換する
             ColorImagePoint point = kinect.MapSkeletonPointToColor(joint.Position, kinect.ColorStream.Format);
@@ -121,24 +127,27 @@ namespace kinectTestWPF1
             // 円を書く
             canvas1.Children.Add(new Ellipse()
             {
-                Margin = new Thickness(multiMargin1[0] * point.X, multiMargin1[0] * point.Y, 0, 0),
+                Margin = new Thickness(multiMargin1[2] + multiMargin1[0] * point.X, multiMargin1[3] + multiMargin1[1] * point.Y, 0, 0),
                 Fill = new SolidColorBrush(color),
-                Width = 20,
-                Height = 20,
+                Width = cir,
+                Height = cir,
             });
         }
         private double[] getMargin()
         {
-            double rgbMin = Math.Min(imageRgbCamera.ActualHeight, imageRgbCamera.ActualWidth);
-            double multiWidth = rgbMin / 640;
-            double multiHeight = rgbMin / 480;
+            double rgbHeight, rgbWidth;
+            rgbHeight = imageRgbCamera.ActualHeight;
+            rgbWidth = imageRgbCamera.ActualWidth;
+            // double rgbMin = Math.Min(rgbHeight, rgbWidth);
+            double multiWidth = rgbWidth / 640;
+            double multiHeight = rgbHeight / 480;
             double[] multiMargin;
-            multiMargin=new double[2];
+            multiMargin = new double[4]; //0:横方向の倍率,1:縦方向の倍率,2:横方向の余白(左側のみ),3:縦方向の余白(上がわのみ)
             multiMargin[0] = multiWidth;
             multiMargin[1] = multiHeight;
-            
+            multiMargin[2] = (canvas1.ActualHeight - rgbHeight);
+            multiMargin[3] = (canvas1.ActualWidth - rgbWidth);
             return multiMargin;
-
         }
     }
 }
