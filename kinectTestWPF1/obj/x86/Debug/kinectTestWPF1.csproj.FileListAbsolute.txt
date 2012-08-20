@@ -49,3 +49,5 @@ C:\Users\haruka\Documents\Visual Studio 2010\Projects\kinectWPF\3--Kaoss-Pad-for
 C:\Users\haruka\Documents\Visual Studio 2010\Projects\kinectWPF\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\obj\x86\Debug\kinectTestWPF1.Properties.Resources.resources
 C:\Users\haruka\Documents\Visual Studio 2010\Projects\kinectWPF\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\obj\x86\Debug\GenerateResource.read.1.tlog
 C:\Users\haruka\Documents\Visual Studio 2010\Projects\kinectWPF\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\obj\x86\Debug\GenerateResource.write.1.tlog
+C:\Users\haruka\Documents\Visual Studio 2010\Projects\kinectWPF\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\obj\x86\Debug\configWindow.baml
+C:\Users\haruka\Documents\Visual Studio 2010\Projects\kinectWPF\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\obj\x86\Debug\configWindow.g.cs

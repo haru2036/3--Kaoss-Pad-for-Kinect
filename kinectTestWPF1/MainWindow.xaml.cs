@@ -24,13 +24,13 @@ namespace kinectTestWPF1
     /// </summary>
     public partial class MainWindow : Window
     {
-         KinectSensor kinect;
-         kinect2Midi midi1;
+        KinectSensor kinect;
+        kinect2Midi midi1;
         public MainWindow()
         {
             InitializeComponent();
             midi1=new kinect2Midi();
-         try {
+            try {
                 if ( KinectSensor.KinectSensors.Count == 0 ) {
                     throw new Exception( "Kinectが接続されていません" );
                 }
