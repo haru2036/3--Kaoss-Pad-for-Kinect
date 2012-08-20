@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using Microsoft.Kinect;
 using Coding4Fun.Kinect.Wpf;
 using Midi;
+using System.Diagnostics;
 
 
 namespace kinectTestWPF1
@@ -136,18 +137,27 @@ namespace kinectTestWPF1
         private double[] getMargin()
         {
             double rgbHeight, rgbWidth;
+            double offsetX, offsetY;
+            offsetX = 0;
+            offsetY = 0;
             rgbHeight = imageRgbCamera.ActualHeight;
             rgbWidth = imageRgbCamera.ActualWidth;
-            // double rgbMin = Math.Min(rgbHeight, rgbWidth);
+            double rgbMin = Math.Min(rgbHeight, rgbWidth);
             double multiWidth = rgbWidth / 640;
             double multiHeight = rgbHeight / 480;
-            double[] multiMargin;
-            multiMargin = new double[4]; //0:横方向の倍率,1:縦方向の倍率,2:横方向の余白(左側のみ),3:縦方向の余白(上がわのみ)
-            multiMargin[0] = multiWidth;
-            multiMargin[1] = multiHeight;
-            multiMargin[2] = (canvas1.ActualHeight - rgbHeight);
-            multiMargin[3] = (canvas1.ActualWidth - rgbWidth);
-            return multiMargin;
+            double[] multiAndOffset;
+            multiAndOffset = new double[4]; //0:横方向の倍率,1:縦方向の倍率,2:横方向の余白(左側のみ),3:縦方向の余白(上がわのみ)
+            multiAndOffset[0] = multiWidth;
+            multiAndOffset[1] = multiHeight;
+            if (rgbWidth > rgbHeight)//横に余白がついている場合
+            {
+                offsetX = (canvas1.ActualWidth- ((rgbHeight / 3) * 4)) / 2;
+            }else{
+                offsetY = (canvas1.ActualHeight - ((rgbWidth / 4) * 3)) / 2;
+             }
+            multiAndOffset[2] = (offsetX);
+            multiAndOffset[3] = (offsetY);
+            return multiAndOffset;
         }
     }
 }
