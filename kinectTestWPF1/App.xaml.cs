@@ -12,6 +12,8 @@ namespace kinectTestWPF1
     /// </summary>
     public partial class App : Application
     {
+        public static int deviceId;
+
         protected override void OnExit(ExitEventArgs e)
         {
             

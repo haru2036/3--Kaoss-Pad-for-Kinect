@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\haruka\Documents\Visual Studio 2010\Projects\kinectWPF\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\obj\x86\Debug\
+C:\dev\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\obj\x86\Debug\
 kinectTestWPF1
 none
 false
 DEBUG;TRACE
-C:\Users\haruka\Documents\Visual Studio 2010\Projects\kinectWPF\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\App.xaml
-2672089956
+C:\dev\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\App.xaml
+32135381195
 
-71615114359
-16406832668
-MainWindow.xaml;configWindow.xaml;
+81510000514
+16754519640
+DummyWindow.xaml;MainWindow.xaml;configWindow.xaml;
 
 False
 

@@ -26,12 +26,16 @@ namespace kinectTestWPF1
     {
         KinectSensor kinect;
         kinect2Midi midi1;
+        bool isNotConnected = false;
+
         public MainWindow()
         {
             InitializeComponent();
-            midi1=new kinect2Midi();
-            try {
+            midi1 = new kinect2Midi();
+            try
+            {
                 if ( KinectSensor.KinectSensors.Count == 0 ) {
+                    isNotConnected = true;
                     throw new Exception( "Kinectが接続されていません" );
                 }
 
@@ -51,7 +55,7 @@ namespace kinectTestWPF1
             }
             catch ( Exception ex ) {
                 MessageBox.Show( ex.Message );
-                Close();
+                //Close();
             }
         }
 
@@ -154,10 +158,18 @@ namespace kinectTestWPF1
                 offsetX = (canvas1.ActualWidth- ((rgbHeight / 3) * 4)) / 2;
             }else{
                 offsetY = (canvas1.ActualHeight - ((rgbWidth / 4) * 3)) / 2;
-             }
+            }
             multiAndOffset[2] = (offsetX);
             multiAndOffset[3] = (offsetY);
             return multiAndOffset;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (isNotConnected == true)
+            {
+                Close();
+            }
         }
     }
 }

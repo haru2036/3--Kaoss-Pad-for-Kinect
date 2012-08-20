@@ -7,12 +7,15 @@ namespace kinectTestWPF1
 {
     class kinect2Midi
     {
-        public OutputDevice outputDevice = OutputDevice.InstalledDevices[1];
+        static int deviceId = kinectTestWPF1.App.deviceId;
+        public OutputDevice outputDevice = OutputDevice.InstalledDevices[deviceId];
         int vx, vy, vz;
+
         public kinect2Midi()
         {
             outputDevice.Open();
         }
+
         //実際に使うのはこっち
         public void sendAll(float X, float Y, float Z)
         {
@@ -29,19 +32,23 @@ namespace kinectTestWPF1
             outputDevice.SendControlChange(Channel.Channel2, Midi.Control.ModulationWheel, type);
             outputDevice.SendControlChange(Channel.Channel3, Midi.Control.ModulationWheel, reso);
         }
+        
         //ここからの３つはMidi Learnで覚えさせるためのテスト信号
         public void sendX()
         {
             outputDevice.SendControlChange(Channel.Channel1, Midi.Control.ModulationWheel, 63);
         }
+        
         public void sendY()
         {
             outputDevice.SendControlChange(Channel.Channel3, Midi.Control.ModulationWheel, 63);
         }
+        
         public void sendZ()
         {
             outputDevice.SendControlChange(Channel.Channel2, Midi.Control.ModulationWheel, 63);
         }
+        
         ~kinect2Midi()
         {
             outputDevice.Close();

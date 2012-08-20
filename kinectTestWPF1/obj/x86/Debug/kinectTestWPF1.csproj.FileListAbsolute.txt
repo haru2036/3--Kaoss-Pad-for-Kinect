@@ -51,3 +51,24 @@ C:\Users\haruka\Documents\Visual Studio 2010\Projects\kinectWPF\3--Kaoss-Pad-for
 C:\Users\haruka\Documents\Visual Studio 2010\Projects\kinectWPF\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\obj\x86\Debug\GenerateResource.write.1.tlog
 C:\Users\haruka\Documents\Visual Studio 2010\Projects\kinectWPF\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\obj\x86\Debug\configWindow.baml
 C:\Users\haruka\Documents\Visual Studio 2010\Projects\kinectWPF\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\obj\x86\Debug\configWindow.g.cs
+C:\dev\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\bin\Debug\kinectTestWPF1.exe.config
+C:\dev\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\obj\x86\Debug\kinectTestWPF1.exe
+C:\dev\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\obj\x86\Debug\kinectTestWPF1.pdb
+C:\dev\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\bin\Debug\kinectTestWPF1.exe
+C:\dev\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\bin\Debug\kinectTestWPF1.pdb
+C:\dev\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\bin\Debug\Coding4Fun.Kinect.Wpf.dll
+C:\dev\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\bin\Debug\Microsoft.Expression.Drawing.dll
+C:\dev\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\bin\Debug\Midi.xml
+C:\dev\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\dev\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\obj\x86\Debug\DummyWindow.baml
+C:\dev\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\obj\x86\Debug\MainWindow.baml
+C:\dev\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\obj\x86\Debug\configWindow.baml
+C:\dev\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\obj\x86\Debug\DummyWindow.g.cs
+C:\dev\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\obj\x86\Debug\MainWindow.g.cs
+C:\dev\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\obj\x86\Debug\configWindow.g.cs
+C:\dev\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\obj\x86\Debug\App.g.cs
+C:\dev\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\obj\x86\Debug\kinectTestWPF1_MarkupCompile.cache
+C:\dev\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\obj\x86\Debug\kinectTestWPF1.g.resources
+C:\dev\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\obj\x86\Debug\kinectTestWPF1.Properties.Resources.resources
+C:\dev\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\obj\x86\Debug\GenerateResource.read.1.tlog
+C:\dev\3--Kaoss-Pad-for-Kinect\kinectTestWPF1\obj\x86\Debug\GenerateResource.write.1.tlog
