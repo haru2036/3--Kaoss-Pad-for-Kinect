@@ -98,6 +98,7 @@ namespace kinectTestWPF1
                             {
                                 midi1.sendAll(joint.Position.X, joint.Position.Y, joint.Position.Z);
                                 drawCircle(joint, Colors.Red, 5);
+                                drawCoordinate(joint);
                             }
                             else if (joint.JointType == JointType.Head)
                             {
@@ -178,6 +179,19 @@ namespace kinectTestWPF1
                 Close();
             }
         }
+        private void drawCoordinate(Joint joint)
+        {
+            Label text1 = new Label();
+            text1.Content = "(" + joint.Position.X.ToString() + "," + joint.Position.Y.ToString() + "," + joint.Position.Z.ToString() + ")";
+
+            ColorImagePoint point = kinect.MapSkeletonPointToColor(joint.Position, kinect.ColorStream.Format);
+            double[] multiMargin1 = getMargin();
+            text1.Margin = new Thickness(multiMargin1[2] + multiMargin1[0] * point.X, multiMargin1[3] + multiMargin1[1] * point.Y, 0, 0);
+            text1.Foreground = new SolidColorBrush(Colors.Aqua);
+
+            canvas1.Children.Add(text1);
+        }
+
     }
 }
 
