@@ -94,6 +94,29 @@ namespace kinectTestWPF1
                         // 骨格を描画する
                         foreach (Joint joint in skeleton.Joints)
                         {
+                            if (joint.JointType == JointType.HandLeft)
+                            {
+
+                                if (Math.Max(0, Math.Min(127, (int)(127 * (joint.Position.Z - 1)))) <= 63)
+                                {
+                                    
+                                }
+                                else
+                                {
+                                    
+                                }
+                                if (Math.Max(0, Math.Min(127, (int)(127 * (joint.Position.Z - 1)))) >= 63)
+                                {
+                                    drawCoordinate(joint, Colors.Pink);
+                                    midi1.sendNoteOff(kinectTestWPF1.App.noteChannel);
+                                    kinectTestWPF1.kinect2Midi.sendingPitch = Pitch.A0;
+                                }
+                                else
+                                {
+                                    drawCoordinate(joint, Colors.Aqua);
+                                    midi1.sendNoteOn(joint.Position.Y, 0, kinectTestWPF1.App.noteChannel);
+                                }
+                            }
                             if (joint.JointType == JointType.HandRight)
                             {
                                 midi1.sendAll(joint.Position.X, joint.Position.Y, joint.Position.Z);

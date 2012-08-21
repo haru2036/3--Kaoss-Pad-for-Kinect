@@ -7,6 +7,8 @@ namespace kinectTestWPF1
 {
     class kinect2Midi
     {
+        public static Pitch sendingPitch = Pitch.A0;
+        bool isSending=false;
         static int deviceId = kinectTestWPF1.App.deviceId;
         public OutputDevice outputDevice = OutputDevice.InstalledDevices[deviceId];
         int vx, vy, vz;
@@ -48,7 +50,85 @@ namespace kinectTestWPF1
         {
             outputDevice.SendControlChange(Channel.Channel2, Midi.Control.ModulationWheel, 63);
         }
-        
+
+        public void sendNoteOn(float position, int scale,Channel channel)
+        {
+            int note = get127(position);
+            Pitch pitch =getPitch(note,scale);
+            if (isSending==true)
+            {
+                if (sendingPitch != pitch)
+                {
+                    sendNoteOff(channel);
+                    
+                }
+                
+            }
+            if (sendingPitch != pitch)
+            {
+                sendingPitch = pitch;
+                isSending = true;
+                outputDevice.SendNoteOn(channel, pitch, 64);
+            }
+            
+        }
+        public void sendNoteOff(Channel channel)
+        {
+         
+            outputDevice.SendNoteOff(channel, sendingPitch, 64);
+            isSending = false;
+        }
+
+        private Pitch getPitch(int note , int Scale)
+        {
+            Pitch pitch=Pitch.A0;
+            int divide=(int)note/10;
+            switch (divide){
+                case 0:
+                    pitch =Pitch.A4;
+                    break;
+                case 1:
+                    pitch =Pitch.B4;
+                    break;
+                case 2:
+                    pitch =Pitch.C4;
+                    break;
+                case 3:
+                    pitch =Pitch.D4;
+                    break;
+                case 4:
+                    pitch =Pitch.E4;
+                    break;
+                case 5:
+                    pitch =Pitch.F4;
+                    break;
+                case 6:
+                    pitch =Pitch.G4;
+                    break;
+                case 7:
+                    pitch =Pitch.A5;
+                    break;
+                case 8:
+                    pitch =Pitch.B5;
+                    break;
+                case 9:
+                    pitch =Pitch.C5;
+                    break;
+                case 10:
+                    pitch =Pitch.D5;
+                    break;
+                default:
+                    break;
+            }
+            return pitch;
+            
+        }
+
+        private int get127(float position)
+        {
+           return Math.Max(0, Math.Min(127, (int)(63.5 * (position + 1))));
+        }
+
         ~kinect2Midi()
         {
             outputDevice.Close();
