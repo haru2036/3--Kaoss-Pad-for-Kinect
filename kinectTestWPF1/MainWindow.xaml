@@ -6,9 +6,9 @@
         <Image Name="imageRgbCamera" Stretch="Uniform"/>
         <Image Name="imageDepthCamera" Stretch="Uniform" Opacity="0.7" />
         <WrapPanel>
-            <Button Content="テスト信号(X)" Height="23" Name="button1" Width="75" Click="button1_Click" />
-            <Button Content="テスト信号(Y)" Height="23" Name="button2" Width="75" Click="button2_Click" />
-            <Button Content="テスト信号(Z)" Height="23" Name="button3" Width="75" Click="button3_Click" />
+            <Button Content="テスト信号(X)" Height="23" Name="button1" Width="85" Click="button1_Click" />
+            <Button Content="テスト信号(Y)" Height="23" Name="button2" Width="85" Click="button2_Click" />
+            <Button Content="テスト信号(Z)" Height="23" Name="button3" Width="85" Click="button3_Click" />
         </WrapPanel>
 
         <Canvas Name="canvas1" Margin="0,-9,0,9">
