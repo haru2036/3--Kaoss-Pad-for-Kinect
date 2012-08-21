@@ -13,6 +13,7 @@ namespace kinectTestWPF1
     public partial class App : Application
     {
         public static int deviceId;
+        public static bool isSeated;
 
         protected override void OnExit(ExitEventArgs e)
         {

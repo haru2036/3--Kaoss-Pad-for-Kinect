@@ -42,6 +42,13 @@ namespace kinectTestWPF1
                 // Kinectインスタンスを取得する
                 kinect = KinectSensor.KinectSensors[0];
 
+                //Seated modeの設定を反映する
+                if(kinectTestWPF1.App.isSeated==true)
+                {
+                    kinect.SkeletonStream.TrackingMode = SkeletonTrackingMode.Seated;
+                }
+                
+
                 // すべてのフレーム更新通知をもらう
                 kinect.AllFramesReady += new EventHandler<AllFramesReadyEventArgs>( kinect_AllFramesReady );
 
