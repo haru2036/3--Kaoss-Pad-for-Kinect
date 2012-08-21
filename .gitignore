@@ -1,3 +1,5 @@
+*.suo
+
 kinectTestWPF1/obj/x86/Debug/*.*
 kinectTestWPF1/bin/Debug/*.*
 !Midi.dll
