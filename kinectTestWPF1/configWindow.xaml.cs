@@ -54,5 +54,16 @@ namespace kinectTestWPF1
             mainWindow.Show();
             this.Close();
         }
+
+        private void radioButton1_Checked(object sender, RoutedEventArgs e)
+        {
+            kinectTestWPF1.App.isSeated = false;
+        }
+
+        private void radioButton2_Checked(object sender, RoutedEventArgs e)
+        {
+            kinectTestWPF1.App.isSeated = true;
+
+        }
     }
 }

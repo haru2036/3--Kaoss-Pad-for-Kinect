@@ -10,8 +10,8 @@
         <GroupBox Header="トラッキングモード" Height="55
                   " HorizontalAlignment="Left" Margin="12,129,0,0" Name="groupBox1" VerticalAlignment="Top" Width="254">
             <Grid>
-                <RadioButton Content="Default" Height="16" HorizontalAlignment="Left" Margin="6,6,0,0" Name="radioButton1" VerticalAlignment="Top" IsChecked="True" />
-                <RadioButton Content="Seated" Height="16" HorizontalAlignment="Left" Margin="124,6,0,0" Name="radioButton2" VerticalAlignment="Top" />
+                <RadioButton Content="Default" Height="16" HorizontalAlignment="Left" Margin="6,6,0,0" Name="radioButton1" VerticalAlignment="Top" IsChecked="True" Checked="radioButton1_Checked" />
+                <RadioButton Content="Seated" Height="16" HorizontalAlignment="Left" Margin="124,6,0,0" Name="radioButton2" VerticalAlignment="Top" Checked="radioButton2_Checked" />
             </Grid>
         </GroupBox>
     </Grid>
