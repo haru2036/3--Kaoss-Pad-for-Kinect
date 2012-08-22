@@ -14,7 +14,7 @@ namespace kinectTestWPF1
     {
         public static int deviceId;
         public static bool isSeated;
-
+        public static Midi.Channel noteChannel;
         protected override void OnExit(ExitEventArgs e)
         {
             

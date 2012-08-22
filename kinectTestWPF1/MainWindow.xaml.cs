@@ -75,42 +75,72 @@ namespace kinectTestWPF1
             ShowSkeleton( e );
         }
 
-        private void ShowSkeleton( AllFramesReadyEventArgs e )
+        private void ShowSkeleton(AllFramesReadyEventArgs e)
         {
             // キャンバスをクリアする
             canvas1.Children.Clear();
 
             // スケルトンフレームを取得する
             SkeletonFrame skeletonFrame = e.OpenSkeletonFrame();
-            if ( skeletonFrame != null ) {
+            if (skeletonFrame != null)
+            {
                 // スケルトンデータを取得する
                 Skeleton[] skeletonData = new Skeleton[skeletonFrame.SkeletonArrayLength];
-                skeletonFrame.CopySkeletonDataTo( skeletonData );
+                skeletonFrame.CopySkeletonDataTo(skeletonData);
 
                 // プレーヤーごとのスケルトンを描画する
-                foreach ( var skeleton in skeletonData ) {
-                    if ( skeleton.TrackingState == SkeletonTrackingState.Tracked ) {
-                        // 骨格を描画する
-                        foreach (Joint joint in skeleton.Joints)
+                foreach (var skeleton in skeletonData)
+                {
+                    //if (skeletonData.Length == 2)
+                    //{
+                        if (skeleton.TrackingState == SkeletonTrackingState.Tracked)
                         {
-                            if (joint.JointType == JointType.HandRight)
+                            // 骨格を描画する
+                            foreach (Joint joint in skeleton.Joints)
                             {
-                                midi1.sendAll(joint.Position.X, joint.Position.Y, joint.Position.Z);
-                                drawCircle(joint, Colors.Red, 5);
-                                drawCoordinate(joint);
-                                drawImage(joint);
-                            }
-                            else if (joint.JointType == JointType.Head)
-                            {
-                                drawCircle(joint, Colors.Aqua, 5);
-                            }
-                            else
-                            {
-                                drawCircle(joint, Colors.Blue, 5);
+                                if (joint.JointType == JointType.HandLeft)
+                                {
+
+                                    if (Math.Max(0, Math.Min(127, (int)(127 * (joint.Position.Z - 1)))) >= 63)
+                                    {
+
+                                        drawCoordinate(joint, Colors.Pink);
+                                        midi1.sendNoteOff(kinectTestWPF1.App.noteChannel);
+                                        kinectTestWPF1.kinect2Midi.sendingPitch = Pitch.A0;
+                                    }
+                                    else
+                                    {
+                                        drawLine(get10(joint.Position.Y));
+                                        drawCoordinate(joint, Colors.Aqua);
+                                        midi1.sendNoteOn(joint.Position.Y, 0, kinectTestWPF1.App.noteChannel);
+                                    }
+                                }
+                                if (joint.JointType == JointType.HandRight)
+                                {
+                                    midi1.sendAll(joint.Position.X, joint.Position.Y, joint.Position.Z);
+                                    drawCircle(joint, Colors.Red, 5);
+                                    drawImage(joint);
+                                    if (Math.Max(0, Math.Min(127, (int)(127 * (joint.Position.Z - 1)))) <= 63)
+                                    {
+                                        drawCoordinate(joint, Colors.Aqua);
+                                    }
+                                    else
+                                    {
+                                        drawCoordinate(joint, Colors.Pink);
+                                    }
+                                }
+                                else if (joint.JointType == JointType.Head)
+                                {
+                                    drawCircle(joint, Colors.Aqua, 5);
+                                }
+                                else
+                                {
+                                    drawCircle(joint, Colors.Blue, 5);
+                                }
                             }
                         }
                     }
-                }
+                //}
             }
         }
        
@@ -163,8 +193,7 @@ namespace kinectTestWPF1
                 Close();
             }
         }
-
-        private void drawCoordinate(Joint joint)
+        private void drawCoordinate(Joint joint,Color col)
         {
             Label text1 = new Label();
             text1.Content = "(" + joint.Position.X.ToString() + "," + joint.Position.Y.ToString() + "," + joint.Position.Z.ToString() + ")";
@@ -172,9 +201,32 @@ namespace kinectTestWPF1
             ColorImagePoint point = kinect.MapSkeletonPointToColor(joint.Position, kinect.ColorStream.Format);
             double[] multiMargin1 = getMargin();
             text1.Margin = new Thickness(multiMargin1[2] + multiMargin1[0] * point.X, multiMargin1[3] + multiMargin1[1] * point.Y, 0, 0);
-            text1.Foreground = new SolidColorBrush(Colors.Aqua);
-
+            text1.FontSize = 30;
+            text1.Foreground = new SolidColorBrush(col);
+            System.Windows.Media.Effects.DropShadowEffect dshadow = new System.Windows.Media.Effects.DropShadowEffect();
+            text1.Effect=dshadow;
+            text1.FontFamily = new System.Windows.Media.FontFamily("Agency FB");
             canvas1.Children.Add(text1);
+        }
+        private int get10(float position)
+        {
+            return (int)((position + 1 )* 5);
+        }
+        private void drawLine(int position)
+        {
+            double[] offsets = getMargin();
+            float segmentSize = (float)imageRgbCamera.ActualHeight/10;
+            float linePosition = (float)imageRgbCamera.ActualHeight - (position*segmentSize);
+            Line line = new Line();
+            line.StrokeThickness = segmentSize;
+            line.Stroke = new SolidColorBrush(Colors.Aqua);
+            line.Y1 = linePosition;
+            line.Y2 = linePosition;
+            line.X1 = offsets[3]*offsets[1];
+            line.X2 = offsets[3]+imageRgbCamera.ActualWidth*offsets[1];
+            line.Effect = new System.Windows.Media.Effects.DropShadowEffect();
+            line.Opacity = 0.3;
+            canvas1.Children.Add(line);
         }
 
         private void drawImage(Joint joint)
