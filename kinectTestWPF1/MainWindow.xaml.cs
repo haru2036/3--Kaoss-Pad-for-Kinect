@@ -30,6 +30,7 @@ namespace kinectTestWPF1
         KinectSensor kinect;
         kinect2Midi midi1;
         bool isNotConnected = false;
+        double angle = 0;
 
         public MainWindow()
         {
@@ -51,7 +52,6 @@ namespace kinectTestWPF1
                 {
                     kinect.SkeletonStream.TrackingMode = SkeletonTrackingMode.Seated;
                 }
-
 
                 // すべてのフレーム更新通知をもらう
                 kinect.AllFramesReady += new EventHandler<AllFramesReadyEventArgs>(kinect_AllFramesReady);
@@ -100,7 +100,7 @@ namespace kinectTestWPF1
                     case 0:
                         drawString("画面の中に入ってください！");
                         if (flicker <= 0)
-                        {
+                    {
                             flicker = flicker + (float)0.05;
                         }
                         else if (flicker >= 1)
@@ -117,7 +117,6 @@ namespace kinectTestWPF1
 
                                 if (Math.Max(0, Math.Min(127, (int)(127 * (joint.Position.Z - 1)))) >= 63)
                                 {
-
                                     //drawCoordinate(joint, Colors.Pink);
                                     midi1.sendNoteOff(kinectTestWPF1.App.noteChannel);
                                     kinectTestWPF1.kinect2Midi.sendingPitch = Pitch.A0;
@@ -133,13 +132,16 @@ namespace kinectTestWPF1
                             {
                                 midi1.sendAll(joint.Position.X, joint.Position.Y, joint.Position.Z);
                                 drawCircle(joint, Colors.Red, 5);
+
                                 if (Math.Max(0, Math.Min(127, (int)(127 * (joint.Position.Z - 1)))) <= 63)
                                 {
                                     //drawCoordinate(joint, Colors.Aqua);
+                                    drawImage(joint, "images/blue.png");
                                 }
                                 else
                                 {
                                     //drawCoordinate(joint, Colors.Pink);
+                                    drawImage(joint, "images/pink.png");
                                 }
                             }
                             else if (joint.JointType == JointType.Head)
@@ -165,11 +167,11 @@ namespace kinectTestWPF1
                                 if (Math.Max(0, Math.Min(127, (int)(127 * (joint.Position.Z - 1)))) <= 63)
                                 {
                                     //drawCoordinate(joint, Colors.Aqua);
-                                }
+                    }
                                 else
                                 {
                                     //drawCoordinate(joint, Colors.Pink);
-                                }
+                    }
                             }
                         }
                         skeleton = getSkeleton(skeletonData).Skip(1).First();
@@ -316,6 +318,35 @@ namespace kinectTestWPF1
                     select skel);
             return skels;
        }
+        private void drawImage(Joint joint, string file)
+        {
+            Image img = new Image();
+            img.Source = new BitmapImage(new Uri(file, UriKind.Relative));
+            
+            img.Opacity = 0.8;
+            img.Width = 100;
+            img.Height = 100;
+
+            Matrix imgMatrix = ((MatrixTransform)img.RenderTransform).Matrix;
+            imgMatrix.RotateAt(angle, img.Width / 2, img.Height / 2);
+            img.RenderTransform = new MatrixTransform(imgMatrix);
+
+            if (angle < 360)
+            {
+                angle += 10;
+            }
+            else
+            {
+                angle = 0;
+            }
+
+            ColorImagePoint point = kinect.MapSkeletonPointToColor(joint.Position, kinect.ColorStream.Format);
+            double[] multiMargin1 = getMargin();
+            img.Margin = new Thickness((multiMargin1[2] + multiMargin1[0] * point.X) - img.Width / 2 , 
+                (multiMargin1[3] + multiMargin1[1] * point.Y) - img.Height / 2, 0, 0);
+
+            canvas1.Children.Add(img);
+        }
     }
 }
 
