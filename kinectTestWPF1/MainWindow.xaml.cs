@@ -27,6 +27,7 @@ namespace kinectTestWPF1
         KinectSensor kinect;
         kinect2Midi midi1;
         bool isNotConnected = false;
+        double angle = 0;
 
         public MainWindow()
         {
@@ -91,56 +92,54 @@ namespace kinectTestWPF1
                 // プレーヤーごとのスケルトンを描画する
                 foreach (var skeleton in skeletonData)
                 {
-                    //if (skeletonData.Length == 2)
-                    //{
-                        if (skeleton.TrackingState == SkeletonTrackingState.Tracked)
+                    if (skeleton.TrackingState == SkeletonTrackingState.Tracked)
+                    {
+                        // 骨格を描画する
+                        foreach (Joint joint in skeleton.Joints)
                         {
-                            // 骨格を描画する
-                            foreach (Joint joint in skeleton.Joints)
+                            if (joint.JointType == JointType.HandLeft)
                             {
-                                if (joint.JointType == JointType.HandLeft)
+
+                                if (Math.Max(0, Math.Min(127, (int)(127 * (joint.Position.Z - 1)))) >= 63)
                                 {
 
-                                    if (Math.Max(0, Math.Min(127, (int)(127 * (joint.Position.Z - 1)))) >= 63)
-                                    {
-
-                                        drawCoordinate(joint, Colors.Pink);
-                                        midi1.sendNoteOff(kinectTestWPF1.App.noteChannel);
-                                        kinectTestWPF1.kinect2Midi.sendingPitch = Pitch.A0;
-                                    }
-                                    else
-                                    {
-                                        drawLine(get10(joint.Position.Y));
-                                        drawCoordinate(joint, Colors.Aqua);
-                                        midi1.sendNoteOn(joint.Position.Y, 0, kinectTestWPF1.App.noteChannel);
-                                    }
-                                }
-                                if (joint.JointType == JointType.HandRight)
-                                {
-                                    midi1.sendAll(joint.Position.X, joint.Position.Y, joint.Position.Z);
-                                    drawCircle(joint, Colors.Red, 5);
-                                    drawImage(joint);
-                                    if (Math.Max(0, Math.Min(127, (int)(127 * (joint.Position.Z - 1)))) <= 63)
-                                    {
-                                        drawCoordinate(joint, Colors.Aqua);
-                                    }
-                                    else
-                                    {
-                                        drawCoordinate(joint, Colors.Pink);
-                                    }
-                                }
-                                else if (joint.JointType == JointType.Head)
-                                {
-                                    drawCircle(joint, Colors.Aqua, 5);
+                                    drawCoordinate(joint, Colors.Pink);
+                                    midi1.sendNoteOff(kinectTestWPF1.App.noteChannel);
+                                    kinectTestWPF1.kinect2Midi.sendingPitch = Pitch.A0;
                                 }
                                 else
                                 {
-                                    drawCircle(joint, Colors.Blue, 5);
+                                    drawLine(get10(joint.Position.Y));
+                                    drawCoordinate(joint, Colors.Aqua);
+                                    midi1.sendNoteOn(joint.Position.Y, 0, kinectTestWPF1.App.noteChannel);
                                 }
+                            }
+                            if (joint.JointType == JointType.HandRight)
+                            {
+                                midi1.sendAll(joint.Position.X, joint.Position.Y, joint.Position.Z);
+                                drawCircle(joint, Colors.Red, 5);
+                                drawImage(joint);
+
+                                if (Math.Max(0, Math.Min(127, (int)(127 * (joint.Position.Z - 1)))) <= 63)
+                                {
+                                    drawCoordinate(joint, Colors.Aqua);
+                                }
+                                else
+                                {
+                                    drawCoordinate(joint, Colors.Pink);
+                                }
+                            }
+                            else if (joint.JointType == JointType.Head)
+                            {
+                                drawCircle(joint, Colors.Aqua, 5);
+                            }
+                            else
+                            {
+                                drawCircle(joint, Colors.Blue, 5);
                             }
                         }
                     }
-                //}
+                }
             }
         }
        
@@ -236,6 +235,19 @@ namespace kinectTestWPF1
 
             img.Width = 100;
             img.Height = 100;
+
+            Matrix imgMatrix = ((MatrixTransform)img.RenderTransform).Matrix;
+            imgMatrix.RotateAt(angle, img.Width / 2, img.Height / 2);
+            img.RenderTransform = new MatrixTransform(imgMatrix);
+
+            if (angle < 360)
+            {
+                angle += 10;
+            }
+            else
+            {
+                angle = 0;
+            }
 
             ColorImagePoint point = kinect.MapSkeletonPointToColor(joint.Position, kinect.ColorStream.Format);
             double[] multiMargin1 = getMargin();
