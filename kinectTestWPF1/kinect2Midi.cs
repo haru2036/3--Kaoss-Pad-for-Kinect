@@ -91,31 +91,31 @@ namespace kinectTestWPF1
                     pitch =Pitch.B4;
                     break;
                 case 2:
-                    pitch =Pitch.C4;
+                    pitch =Pitch.CSharp4;
                     break;
                 case 3:
-                    pitch =Pitch.D4;
-                    break;
-                case 4:
                     pitch =Pitch.E4;
                     break;
+                case 4:
+                    pitch =Pitch.FSharp4;
+                    break;
                 case 5:
-                    pitch =Pitch.F4;
+                    pitch = Pitch.GSharp4;
                     break;
                 case 6:
-                    pitch =Pitch.G4;
-                    break;
-                case 7:
                     pitch =Pitch.A5;
                     break;
-                case 8:
+                case 7:
                     pitch =Pitch.B5;
                     break;
+                case 8:
+                    pitch =Pitch.CSharp5;
+                    break;
                 case 9:
-                    pitch =Pitch.C5;
+                    pitch =Pitch.E5;
                     break;
                 case 10:
-                    pitch =Pitch.D5;
+                    pitch =Pitch.GSharp5;
                     break;
                 default:
                     break;
