@@ -47,7 +47,6 @@ namespace kinectTestWPF1
                 {
                     kinect.SkeletonStream.TrackingMode = SkeletonTrackingMode.Seated;
                 }
-                
 
                 // すべてのフレーム更新通知をもらう
                 kinect.AllFramesReady += new EventHandler<AllFramesReadyEventArgs>( kinect_AllFramesReady );
@@ -99,6 +98,7 @@ namespace kinectTestWPF1
                                 midi1.sendAll(joint.Position.X, joint.Position.Y, joint.Position.Z);
                                 drawCircle(joint, Colors.Red, 5);
                                 drawCoordinate(joint);
+                                drawImage(joint);
                             }
                             else if (joint.JointType == JointType.Head)
                             {
@@ -163,6 +163,7 @@ namespace kinectTestWPF1
                 Close();
             }
         }
+
         private void drawCoordinate(Joint joint)
         {
             Label text1 = new Label();
@@ -176,6 +177,20 @@ namespace kinectTestWPF1
             canvas1.Children.Add(text1);
         }
 
+        private void drawImage(Joint joint)
+        {
+            Image img = new Image();
+            img.Source = new BitmapImage(new Uri("images/test.png", UriKind.Relative));
+
+            img.Width = 100;
+            img.Height = 100;
+
+            ColorImagePoint point = kinect.MapSkeletonPointToColor(joint.Position, kinect.ColorStream.Format);
+            double[] multiMargin1 = getMargin();
+            img.Margin = new Thickness(multiMargin1[2] + multiMargin1[0] * point.X, multiMargin1[3] + multiMargin1[1] * point.Y, 0, 0);
+
+            canvas1.Children.Add(img);
+        }
     }
 }
 
