@@ -103,5 +103,13 @@ namespace kinectTestWPF1
             midi1.sendZ(channel, control);
             midi1.Dispose();
         }
+
+        private void Window_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Escape)
+            {
+                this.Close();
+            }
+        }
     }
 }
