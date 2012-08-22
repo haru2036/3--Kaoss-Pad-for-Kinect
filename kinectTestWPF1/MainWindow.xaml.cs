@@ -97,22 +97,16 @@ namespace kinectTestWPF1
                             if (joint.JointType == JointType.HandLeft)
                             {
 
-                                if (Math.Max(0, Math.Min(127, (int)(127 * (joint.Position.Z - 1)))) <= 63)
-                                {
-                                    
-                                }
-                                else
-                                {
-                                    
-                                }
                                 if (Math.Max(0, Math.Min(127, (int)(127 * (joint.Position.Z - 1)))) >= 63)
                                 {
+                                    
                                     drawCoordinate(joint, Colors.Pink);
                                     midi1.sendNoteOff(kinectTestWPF1.App.noteChannel);
                                     kinectTestWPF1.kinect2Midi.sendingPitch = Pitch.A0;
                                 }
                                 else
                                 {
+                                    drawLine(get10(joint.Position.Y));
                                     drawCoordinate(joint, Colors.Aqua);
                                     midi1.sendNoteOn(joint.Position.Y, 0, kinectTestWPF1.App.noteChannel);
                                 }
@@ -223,6 +217,25 @@ namespace kinectTestWPF1
             text1.Effect=dshadow;
             text1.FontFamily = new System.Windows.Media.FontFamily("Agency FB");
             canvas1.Children.Add(text1);
+        }
+        private int get10(float position)
+        {
+            return (int)((position + 1 )* 5);
+        }
+        private void drawLine(int position)
+        {
+            float segmentSize = (float)imageRgbCamera.ActualHeight/10;
+            float linePosition = (float)imageRgbCamera.ActualHeight - (position*segmentSize);
+            Line line = new Line();
+            line.StrokeThickness = segmentSize;
+            line.Stroke = new SolidColorBrush(Colors.Aqua);
+            line.Y1 = linePosition;
+            line.Y2 = linePosition;
+            line.X1 = 0;
+            line.X2 = imageRgbCamera.ActualWidth;
+            line.Effect = new System.Windows.Media.Effects.DropShadowEffect();
+            line.Opacity = 0.3;
+            canvas1.Children.Add(line);
         }
 
     }

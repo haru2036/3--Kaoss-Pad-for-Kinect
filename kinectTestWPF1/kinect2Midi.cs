@@ -54,7 +54,7 @@ namespace kinectTestWPF1
         public void sendNoteOn(float position, int scale,Channel channel)
         {
             int note = get127(position);
-            Pitch pitch =getPitch(note,scale);
+            Pitch pitch =getPitch(position,scale);
             if (isSending==true)
             {
                 if (sendingPitch != pitch)
@@ -79,10 +79,10 @@ namespace kinectTestWPF1
             isSending = false;
         }
 
-        private Pitch getPitch(int note , int Scale)
+        private Pitch getPitch(float position , int Scale)
         {
             Pitch pitch=Pitch.A0;
-            int divide=(int)note/10;
+            int divide=(int)((position + 1 )* 5);
             switch (divide){
                 case 0:
                     pitch =Pitch.A4;
