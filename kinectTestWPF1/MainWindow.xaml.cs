@@ -144,23 +144,6 @@ namespace kinectTestWPF1
             }
         }
        
-
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            midi1.sendX();
-        }
-
-        private void button2_Click(object sender, RoutedEventArgs e)
-        {
-            midi1.sendY();
-        }
-
-        private void button3_Click(object sender, RoutedEventArgs e)
-        {
-            midi1.sendZ();
-        }
-
-
         private void drawCircle(Joint joint, Color color, int cir)
         {
             // 骨格の座標をカラー座標に変換する
@@ -176,6 +159,7 @@ namespace kinectTestWPF1
                 Height = cir,
             });
         }
+
         private double[] getMargin()
         {
             double rgbHeight, rgbWidth;
